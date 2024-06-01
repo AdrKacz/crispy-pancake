@@ -1,7 +1,3 @@
-TODO:
-- Test if deployment worked, run it for a day to see if it stopped, deploy to prod
-- Push, and check the two other tasks
-
 # crispy-pancake
 Serverless trading bots specialized in cryptocurrency
 
@@ -34,8 +30,16 @@ Before you run this command, make sure you added a **CripyPancake** profile in y
 
 The first time you run it in you own AWS account, this will bootstrap resources for 5 to 10 minutes.
 
+```sh
+sst dev
+cd packages/ft_userdata
+sst bind "env | grep -E 'SST_|AWS_' > .env.tmp && docker run --env-file .env.tmp my-image"
+```
+
 # Deploy to AWS
 Simply run `npm run deploy`. **You should never do it unless you have very strong reason to. The deployment to production is handled automatically by Github when you merge in `main` branch.**
+
+The first deployment will create a **CloudFront Distribution**, it will takes up to 15 minutes.
 
 ## Others
 
